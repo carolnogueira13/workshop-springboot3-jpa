@@ -8,11 +8,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "tb-product")
+@Table(name = "tb_product")
 public class Product implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -26,7 +28,10 @@ public class Product implements Serializable {
 	private Double price;
 	private String imgUrl;
 	
-	@Transient
+	@ManyToMany
+	@JoinTable(name = "tb_product_category", // Join table é a anotação referente a relação muitos para muitos (tabela própria)
+	joinColumns = @JoinColumn(name = "product_id"), // coluna referente a essa entidade
+	inverseJoinColumns = @JoinColumn(name = "category_id")) // coluna referente a outra entidade
 	private Set<Category> category = new HashSet<>();
 	
 	public Product() {

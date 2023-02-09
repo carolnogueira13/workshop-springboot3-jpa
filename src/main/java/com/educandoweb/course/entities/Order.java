@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "tb-order")
+@Table(name = "tb_order")
 public class Order implements Serializable{
 	
 	
